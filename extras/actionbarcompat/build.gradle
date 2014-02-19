@@ -30,15 +30,15 @@ android {
 apply plugin: 'maven'
 
 group = 'com.github.chrisbanes'
-version = '1.0.0-SNAPSHOT'
+version = '2.0.6-SNAPSHOT'
 project.ext.description = "A fork of the pull to refresh for ABC."
-project.archivesBaseName = "actionbar-pulltorefresh"
+project.archivesBaseName = "actionbar-pulltorefresh-abc"
 
 uploadArchives {
     repositories {
         mavenDeployer {
             pom.project {
-            name 'project.getName()'
+            name project.getName()
             description project.ext.description
         }
         repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
