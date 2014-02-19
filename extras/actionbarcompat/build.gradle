@@ -14,6 +14,10 @@ android {
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -23,4 +27,24 @@ android {
     }
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply plugin: 'maven'
+
+group = 'com.github.chrisbanes'
+version = '1.0.0-SNAPSHOT'
+project.ext.description = "A fork of the pull to refresh for ABC."
+project.archivesBaseName = "actionbar-pulltorefresh"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+            name 'project.getName()'
+            description project.ext.description
+        }
+        repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+        repository (url: 'http://archiva.tippingcanoe.com/repository/' + (version.endsWith('-SNAPSHOT') ? 'snapshots' : 'internal') + '/') {
+                authentication(userName: mavenUser, password: mavenPassword)
+            }
+        }
+    }
+}
