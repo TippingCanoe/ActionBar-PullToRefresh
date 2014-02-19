@@ -283,7 +283,7 @@ public class PullToRefreshAttacher {
                     final float yDiff = y - mInitialMotionY;
                     final float xDiff = x - mInitialMotionX;
 
-                    if (yDiff > xDiff && yDiff > mTouchSlop) {
+                    if (yDiff > xDiff && yDiff > mTouchSlop && xDiff <= 10.0f) {
                         mIsBeingDragged = true;
                         onPullStarted(y);
                     } else if (yDiff < -mTouchSlop) {
